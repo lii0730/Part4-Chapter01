@@ -1,0 +1,6 @@
+1. MotionLayout 은 MotionScene 을 레퍼런싱 하고, 애니메이션 관련된 모든 것은 MotionScene 에 정의 된다.
+2. ConstraintSet 은 Constraint 정의를 위한 별도의 layout 파일을 만들 필요 없이 직접 Constraint 를 정의할 때 사용할 수 있다.
+  - 타겟 뷰의 크기와 위치를 선언할 수 있고, CustomAttribute 를 통해 타겟 뷰의 다른 속성들도 정의할 수 있다.
+
+3. Transition 은 애니메이션의 시작과 끝 Constraint 를 정의하고, duration 등의 기타 애니메이션 속성들을 정의 한다.
+  - OnClick, OnSwipe 핸들러를 등록할 수 있고, KeyFrameSet 을 통해 애니메이션 시작과 끝 뿐만 아니라 그 사이 지점들의 Constraint 를 정의할 수 있다.

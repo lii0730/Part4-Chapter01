@@ -1,8 +1,9 @@
 package com.example.aop_part4_chapter01
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aop_part4_chapter01.DTO.VideoDTO
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     private val mainRecyclerView : RecyclerView by lazy {
         findViewById(R.id.mainRecyclerView)
     }
+    private val mainMotionLayout : MotionLayout by lazy {
+        findViewById(R.id.mainMotionLayout)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         getVideoList()
+
     }
 
     private fun getVideoList() {

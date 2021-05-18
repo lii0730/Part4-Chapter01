@@ -23,6 +23,7 @@ class VideoAdapter : ListAdapter<VideoModel, VideoAdapter.ViewHolder>(diffUtil){
             subTitleTextView.text = item.subtitle
             Glide.with(thumbnailImageView.context)
                 .load(item.thumb)
+                .centerInside()
                 .into(thumbnailImageView)
         }
     }
