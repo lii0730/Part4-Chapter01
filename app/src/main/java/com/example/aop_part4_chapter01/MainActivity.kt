@@ -15,13 +15,13 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
-    private lateinit var videoAdapter : VideoAdapter
-    private val mainRecyclerView : RecyclerView by lazy {
+    private lateinit var videoAdapter: VideoAdapter
+    private val mainRecyclerView: RecyclerView by lazy {
         findViewById(R.id.mainRecyclerView)
     }
-    private val mainMotionLayout : MotionLayout by lazy {
+    private val mainMotionLayout: MotionLayout by lazy {
         findViewById(R.id.mainMotionLayout)
     }
 
@@ -33,7 +33,14 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, PlayerFragment())
             .commit()
 
-        videoAdapter = VideoAdapter()
+        videoAdapter = VideoAdapter(onItemClicked = { videoModel ->
+            //TODO: 클릭된 아이템에 대한 처리 과정
+            //  클릭된 VideoModel을 PlayerFragment의 PlayerView에 Player로 전달 해야함
+            supportFragmentManager.fragments.find {it is PlayerFragment}?.let {
+                (it as PlayerFragment).settingVideo(videoModel)
+            }
+
+        })
         mainRecyclerView.apply {
             adapter = videoAdapter
             layoutManager = LinearLayoutManager(context)
@@ -50,13 +57,13 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         retrofit.create(VideoService::class.java).also {
-            it.listVideos().enqueue(object: Callback<VideoDTO>{
+            it.listVideos().enqueue(object : Callback<VideoDTO> {
                 override fun onResponse(call: Call<VideoDTO>, response: Response<VideoDTO>) {
-                    if(response.isSuccessful.not()) {
+                    if (response.isSuccessful.not()) {
                         Log.d("MainActivity", "respones Fail")
                         return
                     }
-                    response.body()?.let { videoDto->
+                    response.body()?.let { videoDto ->
                         Log.d("MainActivity", it.toString())
                         videoAdapter.submitList(videoDto.videos)
                     }
